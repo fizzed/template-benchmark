@@ -1,42 +1,45 @@
-pool:
-  vmImage: 'Ubuntu-16.04'
-
-steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
-
-- script: |
-    rm results.*
-    java -jar target/benchmarks.jar -rff results.csv -rf csv
-    cat results.csv
-    sed -i -E 's/com\.mitchellbosecke\.benchmark\.(\w+)\.benchmark/\1/g' results.csv
-    python generate-results-with-version.py
-    cat results.csv
-  displayName: 'Exec benchmarks'
+jobs:
+- job: Linux
   timeoutInMinutes: 0
-  
-- script: sudo apt-get install -y gnuplot
-  displayName: 'Install gnuplot'
-  
-- script: gnuplot benchmark.plot
-  displayName: 'Generate results.png'
-  
-- task: CopyFiles@2
-  inputs:
-    contents: |
-       **/*.jar
-       results.*
-    targetFolder: '$(build.artifactStagingDirectory)'
+  pool:
+    vmImage: 'Ubuntu-16.04'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    artifactName: 'results'
-    pathToPublish: '$(build.artifactStagingDirectory)'
+  steps:
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      goals: 'package'
+  
+  - script: |
+      rm results.*
+      java -jar target/benchmarks.jar -rff results.csv -rf csv
+      cat results.csv
+      sed -i -E 's/com\.mitchellbosecke\.benchmark\.(\w+)\.benchmark/\1/g' results.csv
+      python generate-results-with-version.py
+      cat results.csv
+    displayName: 'Exec benchmarks'
+    
+    
+  - script: sudo apt-get install -y gnuplot
+    displayName: 'Install gnuplot'
+    
+  - script: gnuplot benchmark.plot
+    displayName: 'Generate results.png'
+    
+  - task: CopyFiles@2
+    inputs:
+      contents: |
+         **/*.jar
+         results.*
+      targetFolder: '$(build.artifactStagingDirectory)'
+  
+  - task: PublishBuildArtifacts@1
+    inputs:
+      artifactName: 'results'
+      pathToPublish: '$(build.artifactStagingDirectory)'
