@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: 'Ubuntu-16.04'
 
 steps:
 - task: Maven@3
@@ -7,26 +7,35 @@ steps:
     mavenPomFile: 'pom.xml'
     mavenOptions: '-Xmx3072m'
     javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.10'
+    jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-# Publish Cobertura or JaCoCo code coverage results from a build
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'JaCoCo' 
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/site/jacoco/jacoco.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/**/site/jacoco'
-    failIfCoverageEmpty: true
-
+- script: |
+    rm results.*
+    java -jar target/benchmarks.jar -rff results.csv -rf csv
+    cat results.csv
+    sed -i -E 's/com\.mitchellbosecke\.benchmark\.(\w+)\.benchmark/\1/g' results.csv
+    python generate-results-with-version.py
+    cat results.csv
+  displayName: 'Exec benchmarks'
+  
+- script: sudo apt-get install -y gnuplot
+  displayName: 'Install gnuplot'
+  
+- script: gnuplot benchmark.plot
+  displayName: 'Generate results.png'
+  
 - task: CopyFiles@2
   inputs:
-    contents: '**/*.jar'
+    contents: |
+       **/*.jar
+       results.*
     targetFolder: '$(build.artifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    artifactName: 'jar'
+    artifactName: 'results'
     pathToPublish: '$(build.artifactStagingDirectory)'
