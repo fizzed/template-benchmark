@@ -26,5 +26,5 @@ set style line 2 lc rgb '#808080' lt 1
 set border 3 back ls 2
 set tics nomirror
 
-plot 'results.csv' every ::1 using 0:5:xticlabels(stringcolumn(1)[31:36]) with boxes ls 1,\
+plot 'results.csv' every ::1 using 0:5:xticlabels(stringcolumn(1)) with boxes ls 1,\
     'results.csv' every ::1 using 0:($5 + 1500):(sprintf("%d",$5)) with labels
