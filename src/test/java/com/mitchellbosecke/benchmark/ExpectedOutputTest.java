@@ -54,8 +54,15 @@ public class ExpectedOutputTest {
     }
 
     @Test
-    public void testMustacheOutput() throws IOException {
-        Mustache mustache = new Mustache();
+    public void testMustache_SamskivertOutput() throws IOException {
+        Mustache_Samskivert mustache = new Mustache_Samskivert();
+        mustache.setup();
+        assertOutput(mustache.benchmark());
+    }
+
+    @Test
+    public void testMustache_SpullaraOutput() throws IOException {
+        Mustache_Spullara mustache = new Mustache_Spullara();
         mustache.setup();
         assertOutput(mustache.benchmark());
     }

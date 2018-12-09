@@ -12,7 +12,7 @@ import org.openjdk.jmh.annotations.Setup;
 
 import com.mitchellbosecke.benchmark.model.Stock;
 
-public class Mustache extends BaseBenchmark {
+public class Mustache_Samskivert extends BaseBenchmark {
 
     private Template template;
 
