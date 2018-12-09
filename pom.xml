@@ -15,7 +15,7 @@
 		<uberjar.name>benchmarks</uberjar.name>
 
 		<pebble.version>3.0.6</pebble.version>
-		<mustache.version>0.9.5</mustache.version>
+		<mustache.version>1.14</mustache.version>
 		<freemarker.version>2.3.28</freemarker.version>
 		<velocity.version>2.0</velocity.version>
 		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
@@ -125,8 +125,8 @@
 			<version>${pebble.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.spullara.mustache.java</groupId>
-			<artifactId>compiler</artifactId>
+			<groupId>com.samskivert</groupId>
+			<artifactId>jmustache</artifactId>
 			<version>${mustache.version}</version>
 		</dependency>
 		<dependency>
