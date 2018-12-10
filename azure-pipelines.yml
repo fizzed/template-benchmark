@@ -22,6 +22,7 @@ jobs:
       cat results.csv
       sed -i -E 's/com\.mitchellbosecke\.benchmark\.(\w+)\.benchmark/\1/g' results.csv
       python generate-results-with-version.py
+      sed -i -E 's/Mustache_/Mustache /g' results.csv
       cat results.csv
     displayName: 'Exec benchmarks'
     
