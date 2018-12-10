@@ -7,34 +7,31 @@ html {
         meta('http-equiv':"Content-Script-Type", 'content':"text/javascript")
         link('rel':"shortcut icon", 'href':"/images/favicon.ico")
         link('rel':"stylesheet", 'type':"text/css", 'href':"/css/style.css", 'media':"all")
-yieldUnescaped '''<script type="text/javascript" src="/js/util.js"></script>
-<style type="text/css">
-/*<![CDATA[*/
+        script('type':"text/javascript", 'src':"/js/util.js", "")
+        style('type':"text/css", """/*<![CDATA[*/
 body {
-	color: #333333;
-	line-height: 150%;
+color: #333333;
+line-height: 150%;
 }
 
 thead {
-	font-weight: bold;
-	background-color: #CCCCCC;
+font-weight: bold;
+background-color: #CCCCCC;
 }
 
 .odd {
-	background-color: #FFCCCC;
+background-color: #FFCCCC;
 }
 
 .even {
-	background-color: #CCCCFF;
+background-color: #CCCCFF;
 }
 
 .minus {
-	color: #FF0000;
+color: #FF0000;
 }
 
-/*]]>*/
-</style>'''
-
+/*]]>*/""")
     }
     body {
         h1('Stock Prices')
@@ -50,9 +47,9 @@ thead {
                     th('ratio')
                 }
             }
-                tbody {
-            items.eachWithIndex {item, idx ->
 
+            tbody {
+                items.eachWithIndex {item, idx ->
                     tr (class: idx % 2 ? 'even' : 'odd'){
                         td(idx + 1)
                         td {
@@ -72,8 +69,8 @@ thead {
                             td(item.ratio)
                         }
                     }
+                }
             }
-                            }
         }
     }
 }
