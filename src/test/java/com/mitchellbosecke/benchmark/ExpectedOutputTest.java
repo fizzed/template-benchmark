@@ -81,6 +81,13 @@ public class ExpectedOutputTest {
         assertOutput(trimou.benchmark());
     }
 
+    @Test
+    public void testGroovyOutput() throws IOException {
+        Groovy groovy = new Groovy();
+        groovy.setup();
+        assertOutput(groovy.benchmark());
+    }
+
     private void assertOutput(String output) throws IOException {
         assertEquals(readExpectedOutputResource(), output.replaceAll("\\s", ""));
     }

@@ -23,6 +23,7 @@
 		<junit.version>4.11</junit.version>
 		<trimou.version>2.5.0.Final</trimou.version>
         <rocker.version>1.2.0</rocker.version>
+		<groovy.version>2.5.4</groovy.version>
 	</properties>
 
 	<licenses>
@@ -160,6 +161,11 @@
             <artifactId>rocker-runtime</artifactId>
             <version>${rocker.version}</version>
         </dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-templates</artifactId>
+			<version>${groovy.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
