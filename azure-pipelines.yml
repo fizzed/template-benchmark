@@ -15,7 +15,12 @@ jobs:
       publishJUnitResults: true
       testResultsFiles: '**/surefire-reports/TEST-*.xml'
       goals: 'package'
-  
+
+  - script: |
+      cat /proc/cpuinfo; lscpu
+      cat /proc/meminfo; free -m
+    displayName: 'Show hardware info'
+
   - script: |
       less /proc/cpuinfo; lscpu
       rm results.*
