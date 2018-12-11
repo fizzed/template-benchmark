@@ -1,8 +1,10 @@
-"Benchmark","Mode","Threads","Samples","Score","Score Error (99.9%)","Unit"
-"com.mitchellbosecke.benchmark.Freemarker.benchmark","thrpt",1,50.000000,16737.333340,184.040944,"ops/s"
-"com.mitchellbosecke.benchmark.Mustache.benchmark","thrpt",1,50.000000,23393.115757,159.003408,"ops/s"
-"com.mitchellbosecke.benchmark.Pebble.benchmark","thrpt",1,50.000000,35736.995844,248.860050,"ops/s"
-"com.mitchellbosecke.benchmark.Rocker.benchmark","thrpt",1,50.000000,41123.645420,191.949947,"ops/s"
-"com.mitchellbosecke.benchmark.Thymeleaf.benchmark","thrpt",1,50.000000,1519.092213,18.156292,"ops/s"
-"com.mitchellbosecke.benchmark.Trimou.benchmark","thrpt",1,50.000000,19081.925071,112.440326,"ops/s"
-"com.mitchellbosecke.benchmark.Velocity.benchmark","thrpt",1,50.000000,21553.362499,223.035824,"ops/s"
+Benchmark,Mode,Threads,Samples,Score,Score Error (99.9%),Unit
+Freemarker 2.3.28,thrpt,1,50,14375.008770,67.949534,ops/s
+Groovy 2.5.4,thrpt,1,50,9916.720420,310.450084,ops/s
+Mustache Samskivert 1.14,thrpt,1,50,9756.638916,201.174622,ops/s
+Mustache Spullara 0.9.5,thrpt,1,50,16561.498801,51.512659,ops/s
+Pebble 3.0.6,thrpt,1,50,19575.873030,372.340451,ops/s
+Rocker 1.2.0,thrpt,1,50,29665.500272,326.030892,ops/s
+Thymeleaf 3.0.11.RELEASE,thrpt,1,50,4547.712767,44.024793,ops/s
+Trimou 2.5.0.Final,thrpt,1,50,16102.162324,207.259233,ops/s
+Velocity 2.0,thrpt,1,50,16435.810422,124.612788,ops/s
