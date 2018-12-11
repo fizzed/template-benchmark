@@ -17,6 +17,7 @@ jobs:
       goals: 'package'
   
   - script: |
+      less /proc/cpuinfo; lscpu
       rm results.*
       java -jar target/benchmarks.jar -rff results.csv -rf csv
       cat results.csv
