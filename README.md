@@ -4,12 +4,13 @@ template-benchmark
 JMH benchmark for popular Java template engines:
 
 * [Freemarker](http://freemarker.org/)
-* [Mustache](https://github.com/spullara/mustache.java)
+* Mustache ([spullara](https://github.com/spullara/mustache.java) and [samskivert](https://github.com/samskivert/jmustachet) implementations)
 * [Pebble](http://www.mitchellbosecke.com/pebble)
 * [Rocker](https://github.com/fizzed/rocker)
 * [Thymeleaf](http://www.thymeleaf.org/)
 * [Trimou](http://trimou.org/)
 * [Velocity](http://velocity.apache.org/)
+* [Groovy Template](http://groovy-lang.org/)
 
 Running the benchmark
 ======================

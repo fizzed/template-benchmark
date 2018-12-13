@@ -13,7 +13,7 @@ set datafile separator ','
 # Output
 set terminal pngcairo enhanced font "Verdana,9"
 set output 'results.png'
-set grid
+set grid lw 0.5
 set key off
 set boxwidth 0.8 relative
 
@@ -26,5 +26,6 @@ set style line 2 lc rgb '#808080' lt 1
 set border 3 back ls 2
 set tics nomirror
 
-plot 'results.csv' every ::1 using 0:5:xticlabels(stringcolumn(1)[31:36]) with boxes ls 1,\
-    'results.csv' every ::1 using 0:($5 + 1500):(sprintf("%d",$5)) with labels
+plot 'results.csv' every ::1 using 0:5:xticlabels(stringcolumn(1)) with boxes ls 1,\
+    'results.csv' every ::1 using 0:($5 + 1500):(sprintf("%d",$5)) with labels,\
+	'results.csv' every ::1 using 0:5:6 with yerrorbars linestyle -1 lc rgb 'black' lw 1

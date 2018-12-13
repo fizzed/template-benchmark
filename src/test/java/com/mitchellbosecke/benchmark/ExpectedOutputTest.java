@@ -54,8 +54,15 @@ public class ExpectedOutputTest {
     }
 
     @Test
-    public void testMustacheOutput() throws IOException {
-        Mustache mustache = new Mustache();
+    public void testMustache_SamskivertOutput() throws IOException {
+        Mustache_Samskivert mustache = new Mustache_Samskivert();
+        mustache.setup();
+        assertOutput(mustache.benchmark());
+    }
+
+    @Test
+    public void testMustache_SpullaraOutput() throws IOException {
+        Mustache_Spullara mustache = new Mustache_Spullara();
         mustache.setup();
         assertOutput(mustache.benchmark());
     }
@@ -72,6 +79,13 @@ public class ExpectedOutputTest {
         Trimou trimou = new Trimou();
         trimou.setup();
         assertOutput(trimou.benchmark());
+    }
+
+    @Test
+    public void testGroovyOutput() throws IOException {
+        Groovy groovy = new Groovy();
+        groovy.setup();
+        assertOutput(groovy.benchmark());
     }
 
     private void assertOutput(String output) throws IOException {

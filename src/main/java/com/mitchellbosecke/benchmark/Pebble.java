@@ -20,8 +20,7 @@ public class Pebble extends BaseBenchmark {
 
     @Setup
     public void setup() throws PebbleException {
-        PebbleEngine engine = new PebbleEngine();
-        engine.getExtension(EscaperExtension.class).setAutoEscaping(false);
+        PebbleEngine engine = new PebbleEngine.Builder().extension(new EscaperExtension()).autoEscaping(false).build();
         template = engine.getTemplate("templates/stocks.pebble.html");
         this.context = getContext();
     }

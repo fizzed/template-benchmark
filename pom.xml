@@ -11,17 +11,19 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jmh.version>1.7.1</jmh.version>
+		<jmh.version>1.21</jmh.version>
 		<uberjar.name>benchmarks</uberjar.name>
 
-		<pebble.version>1.5.2</pebble.version>
-		<mustache.version>0.9.0</mustache.version>
-		<freemarker.version>2.3.22</freemarker.version>
-		<velocity.version>1.7</velocity.version>
-		<thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+		<pebble.version>3.0.6</pebble.version>
+		<mustache_samskivert.version>1.14</mustache_samskivert.version>
+		<mustache_spullara.version>0.9.5</mustache_spullara.version>
+		<freemarker.version>2.3.28</freemarker.version>
+		<velocity.version>2.0</velocity.version>
+		<thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
 		<junit.version>4.11</junit.version>
-		<trimou.version>1.8.1.Final</trimou.version>
-        <rocker.version>0.9.0</rocker.version>
+		<trimou.version>2.5.0.Final</trimou.version>
+        <rocker.version>1.2.0</rocker.version>
+		<groovy.version>2.5.4</groovy.version>
 	</properties>
 
 	<licenses>
@@ -46,8 +48,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
             <plugin>
@@ -120,14 +122,19 @@
 
 		<!-- template engines -->
 		<dependency>
-			<groupId>com.mitchellbosecke</groupId>
+			<groupId>io.pebbletemplates</groupId>
 			<artifactId>pebble</artifactId>
 			<version>${pebble.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.samskivert</groupId>
+			<artifactId>jmustache</artifactId>
+			<version>${mustache_samskivert.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>com.github.spullara.mustache.java</groupId>
 			<artifactId>compiler</artifactId>
-			<version>${mustache.version}</version>
+			<version>${mustache_spullara.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -136,7 +143,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
+			<artifactId>velocity-engine-core</artifactId>
 			<version>${velocity.version}</version>
 		</dependency>
 		<dependency>
@@ -154,6 +161,11 @@
             <artifactId>rocker-runtime</artifactId>
             <version>${rocker.version}</version>
         </dependency>
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-templates</artifactId>
+			<version>${groovy.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>

@@ -1,40 +1,33 @@
 package com.mitchellbosecke.benchmark;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.util.AbstractCollection;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import com.samskivert.mustache.*;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.Setup;
 
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.MustacheException;
-import com.github.mustachejava.MustacheFactory;
 import com.mitchellbosecke.benchmark.model.Stock;
 
-public class Mustache extends BaseBenchmark {
+public class Mustache_Samskivert extends BaseBenchmark {
 
-    private com.github.mustachejava.Mustache template;
+    private Template template;
 
     @Setup
     public void setup() {
-        MustacheFactory mustacheFactory = new DefaultMustacheFactory() {
+        InputStream is = this.getClass().getClassLoader()
+                .getResourceAsStream("templates/stocks.mustache.html");
+        Reader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(is, "UTF8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new IllegalStateException(e);
+        }
 
-            @Override
-            public void encode(String value, Writer writer) {
-                // Disable HTML escaping
-                try {
-                    writer.write(value);
-                } catch (IOException e) {
-                    throw new MustacheException(e);
-                }
-            }
-        };
-        template = mustacheFactory.compile("templates/stocks.mustache.html");
+        template = com.samskivert.mustache.Mustache.compiler().withEscaper(Escapers.NONE).compile(reader);
     }
 
     @SuppressWarnings("unchecked")
@@ -45,7 +38,7 @@ public class Mustache extends BaseBenchmark {
         data.put("items", new StockCollection((Collection<Stock>) data.get("items")));
 
         Writer writer = new StringWriter();
-        template.execute(writer, data);
+        template.execute(data, writer);
         return writer.toString();
     }
 
